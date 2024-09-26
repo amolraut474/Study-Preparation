@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Section</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            background: #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            border-left: 3px solid #007bff;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .faq-answer.active {
+            display: block;
+            max-height: 100px;
+            opacity: 1;
+        }
+
+        .arrow {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active .arrow {
+            transform: rotate(-180deg);
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .nav-button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+        }
+
+        .category-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .category-button {
+            padding: 10px;
+            margin: 0 5px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .Top-heading{
+         text-align: center;
+        }
+
+        @media screen and (max-width: 425px) {
+       .category-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Creates three equal columns */
+        gap: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<div class="faq-container">
+    <h1 class="Top-heading">Frequently Asked Questions</h1>
+
+    <div class="category-buttons">
+        <button class="category-button" onclick="filterQuestions('all')">All</button>
+        <button class="category-button" onclick="filterQuestions('html')">HTML</button>
+        <button class="category-button" onclick="filterQuestions('css')">CSS</button>
+        <button class="category-button" onclick="filterQuestions('javascript')">JavaScript</button>
+        <button class="category-button" onclick="filterQuestions('react')">React</button>
+        <button class="category-button" onclick="filterQuestions('bootstrap')">Bootstrap</button>
+        <button class="category-button" onclick="filterQuestions('wordpress')">WordPress</button>
+        <button class="category-button" onclick="filterQuestions('shopify')">Shopify</button>
+     
+    </div>
+
+    <div class="faq-list"></div>
+
+    <div class="button-container">
+        <button class="nav-button" id="prevButton" onclick="changePage(-1)" disabled>Back</button>
+        <button class="nav-button" id="nextButton" onclick="changePage(1)">Next</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        // HTML Questions
+        { category: 'html', question: "What is HTML?", answer: "HTML stands for Hypertext Markup Language. It's the standard markup language used to create and design web pages." },
+        { category: 'html', question: "Can you explain the purpose of the doctype declaration in HTML?", answer: "The doctype declaration, usually seen at the beginning of an HTML document (<!DOCTYPE html>), informs the browser about the version of HTML being used and helps it render the document correctly." },
+        { category: 'html', question: "What are the key differences between inline and block-level elements in HTML?", answer: "Inline elements are elements that do not start on a new line and only take up as much width as necessary. Block-level elements start on a new line and occupy the full width available." },
+        { category: 'html', question: "What are the new features introduced in HTML5?", answer: "HTML5 introduced several new features including semantic elements (like header, footer, nav, etc.), audio and video support without plugins, canvas for drawing graphics, local storage, geolocation, and more." },
+        { category: 'html', question: "Explain the purpose of the meta tag in HTML.", answer: "The meta tag is used to provide metadata about an HTML document, such as character encoding, author, description, keywords, and viewport settings for responsive web design." },
+        { category: 'html', question: "What are the different types of lists in HTML?", answer: "HTML supports three types of lists: ordered lists (ol), unordered lists (ul), and definition lists (dl)." },
+        { category: 'html', question: "What is the difference between div and span in HTML?", answer: "'div' is a block-level element used to group larger sections of content, while 'span' is an inline element used to apply styles or group smaller sections of text." },
+        { category: 'html', question: "What are semantic elements in HTML? Give some examples.", answer: "Semantic elements provide meaning to the content they enclose, making it more understandable for both developers and browsers. Examples include header, footer, nav, article, section, aside, and main." },
+        { category: 'html', question: "What are HTML tags?", answer: "HTML tags are elements used to mark up the content of a web page, defining its structure and formatting." },
+        { category: 'html', question: "What is a marquee in HTML?", answer: "Marquee is used for scrolling text on a web page. It scrolls the image or text up, down, left, or right automatically." },
+        { category: 'html', question: "Are the HTML tags and elements the same thing?", answer: "No, HTML tags are used to define the structure of a web page, while HTML elements are made up of a set of tags that define a specific part of a web page." },
+
+        // CSS Questions
+         { category: 'css', question: "What is CSS?", answer: "CSS stands for Cascading Style Sheets. It determines how elements are displayed on a web page." },
+        { category: 'css', question: "How can you center an element horizontally and vertically in CSS?", answer: "Use margin auto for horizontal centering and flexbox or transform for vertical centering." },
+        { category: 'css', question: "Explain the concept of the CSS Box Model.", answer: "The CSS Box Model consists of content, padding, border, and margin." },
+        { category: 'css', question: "What are CSS selectors, and how do they work?", answer: "CSS selectors are patterns used to select and style HTML elements." },
+        { category: 'css', question: "What is the difference between classes and IDs in CSS?", answer: "Classes can be reused across multiple elements; IDs are unique." },
+        { category: 'css', question: "What are CSS Grid and Flexbox, and when would you use each?", answer: "Flexbox is for one-dimensional layouts, Grid is for two-dimensional layouts." },
+        { category: 'css', question: "Can you explain the concept of 'float' in CSS?", answer: "The float property is used to align elements horizontally." },
+        { category: 'css', question: "How would you implement a responsive layout using CSS?", answer: "Use media queries and flexible units to adapt layouts to various screen sizes." },
+        { category: 'css', question: "Explain the difference between inline and block-level elements.", answer: "Inline elements do not start on a new line; block elements do." },
+        { category: 'css', question: "What are pseudo-classes in CSS?", answer: "Pseudo-classes are keywords that specify a special state of an element." },
+        { category: 'css', question: "What is the difference between margin and padding?", answer: "Margin is outside the border; padding is inside." },
+        { category: 'css', question: "What do you understand by the universal selector?", answer: "It matches any element type." },
+        { category: 'css', question: "What is the use of CSS Opacity?", answer: "It specifies the transparency of an element." },
+        { category: 'css', question: "Explain the difference between visibility: hidden and display: none?", answer: "visibility: hidden hides an element but occupies space; display: none removes it from the layout." },
+        { category: 'css', question: "What are the position states in CSS?", answer: "The four-position states are relative, static, absolute, and fixed." },
+        { category: 'css', question: "Differentiate between absolute and relative in CSS.", answer: "Relative is based on the normal flow; absolute is based on the parent." },
+
+        // JavaScript Questions
+
+        { category: 'javascript', question: "What is JavaScript?", answer: "JavaScript is the world's most popular programming language. JavaScript is the programming language of the Web. JavaScript is a high-level, interpreted programming language primarily used for building interactive web applications." },
+        { category: 'javascript', question: "What is JavaScript, and what are its key features?", answer: "JavaScript is a high-level, interpreted programming language primarily used for building interactive web applications. Its key features include: Client-side scripting, lightweight and versatile, object-oriented, and asynchronous programming." },
+        { category: 'javascript', question: "What is the difference between 'undefined' and 'null' in JavaScript?", answer: "'undefined' means a variable has been declared but not assigned a value, while 'null' represents the intentional absence of any object value." },
+        { category: 'javascript', question: "What is hoisting in JavaScript?", answer: "Hoisting is a mechanism where variables and function declarations are moved to the top of their containing scope." },
+        { category: 'javascript', question: "Explain closures in JavaScript and provide an example.", answer: "Closures are functions that have access to the outer function's variables, even after the outer function has finished executing." },
+        { category: 'javascript', question: "What are the differences between '==' and '===' operators in JavaScript?", answer: "'==' checks for equality after type coercion, while '===' checks for strict equality without type coercion." },
+        { category: 'javascript', question: "What are the different ways to define variables in JavaScript?", answer: "You can define variables using var, let, or const. var is function-scoped; let and const are block-scoped." },
+        { category: 'javascript', question: "What are the differences between promises and async/await in JavaScript?", answer: "Promises represent the eventual completion or failure of an asynchronous operation, while async/await provides a syntactic sugar for easier handling of asynchronous code." },
+        { category: 'javascript', question: "What are higher-order functions in JavaScript?", answer: "Higher-order functions are functions that take other functions as arguments or return functions as results." },
+        { category: 'javascript', question: "Explain the 'this' keyword in JavaScript.", answer: "The value of 'this' is determined by how a function is called, referring to the object executing the current function." },
+        { category: 'javascript', question: "What are the different data types in JavaScript?", answer: "JavaScript has several data types: primitive types (number, string, boolean, null, undefined, symbol) and object types (object, array, function, etc.)." },
+        { category: 'javascript', question: "What is the difference between let, const, and var?", answer: "'var' is function-scoped; 'let' and 'const' are block-scoped, with 'const' being immutable." },
+        { category: 'javascript', question: "What are arrays in JavaScript?", answer: "Arrays are ordered collections of values, accessed using bracket notation and manipulated with various methods." },
+        { category: 'javascript', question: "Explain the concept of functions in JavaScript.", answer: "Functions are reusable blocks of code that can be invoked with specific arguments." },
+        { category: 'javascript', question: "What is the DOM (Document Object Model) in JavaScript?", answer: "The DOM represents the structure of an HTML document as a tree of objects." },
+        { category: 'javascript', question: "What are conditional statements in JavaScript?", answer: "Conditional statements like if, else if, and else allow for executing code blocks based on conditions." },
+        { category: 'javascript', question: "Explain call(), apply() and bind() methods.", answer: "call invokes a function with a specified 'this', apply uses an array of arguments, and bind creates a new function with a bound 'this'." },
+        { category: 'javascript', question: "What are callbacks?", answer: "A callback is a function executed after another function." },
+        { category: 'javascript', question: "What are the types of errors in JavaScript?", answer: "Types include syntax errors, which prevent execution, and logical errors, which produce incorrect results." },
+        { category: 'javascript', question: "What are arrow functions?", answer: "Arrow functions provide a shorter syntax for declaring functions and do not have their own 'this' context." },
+        { category: 'javascript', question: "What is the rest parameter and spread operator?", answer: "Rest parameters gather arguments into an array; spread operator spreads elements of an array or object." },
+        { category: 'javascript', question: "In JavaScript, how many different methods can you make an object?", answer: "You can create objects using Object literals, classes, Object.create, and constructors." },
+        { category: 'javascript', question: "What is Object Destructuring?", answer: "Object destructuring allows for unpacking properties from objects into distinct variables." },
+        { category: 'javascript', question: "Is JavaScript a pass-by-reference or pass-by-value language?", answer: "JavaScript is a pass-by-value language, but objects are references." },
+
+          // Bootstrap Questions
+          { category: 'bootstrap', question: "What is Bootstrap?", answer: "Bootstrap is an open-source front-end framework developed by Twitter. It provides a collection of pre-designed and reusable components for building responsive and mobile-first web pages and web applications." },
+        { category: 'bootstrap', question: "What are the key features of Bootstrap?", answer: "Key features include a grid system for responsive layout, pre-styled components, extensive utility classes, support for responsive design, and JavaScript plugins for interactive components." },
+        { category: 'bootstrap', question: "What is the Grid system in Bootstrap?", answer: "Bootstrap's grid system is a responsive, mobile-first flexbox grid system that allows developers to create complex layouts easily with a 12-column layout." },
+        { category: 'bootstrap', question: "Explain the difference between container-fluid and container in Bootstrap.", answer: "container creates a fixed-width container centered on the page, while container-fluid creates a full-width container that spans the entire viewport." },
+        { category: 'bootstrap', question: "How do you include Bootstrap in your project?", answer: "Include Bootstrap by adding the CSS and JavaScript files via link and script tags, or use npm or a CDN." },
+        { category: 'bootstrap', question: "Explain the use of Bootstrap's grid system for creating responsive layouts.", answer: "The grid system divides the layout into 12 columns, using predefined classes to specify widths at different screen sizes." },
+        { category: 'bootstrap', question: "What is the Grid System in Bootstrap?", answer: "Bootstrap's Grid System divides up to 12 columns across the page, allowing for various combinations." },
+
+          // React.js Questions
+          { category: 'react', question: "What is React.js?", answer: "React.js is a JavaScript library developed by Facebook for building user interfaces, particularly for single-page applications. It allows developers to create reusable UI components." },
+        { category: 'react', question: "What are the key features of React.js?", answer: "JSX syntax for defining components, Virtual DOM for efficient rendering, component-based architecture, unidirectional data flow, and React Native for mobile applications." },
+        { category: 'react', question: "What is JSX?", answer: "JSX stands for JavaScript XML. It allows developers to write HTML-like code in React components." },
+        { category: 'react', question: "Explain the concept of Virtual DOM.", answer: "The Virtual DOM is a lightweight copy of the actual DOM that React updates before the actual DOM, improving performance." },
+        { category: 'react', question: "What are components in React?", answer: "Components are reusable, independent pieces of UI that can be composed together." },
+        { category: 'react', question: "What is the difference between state and props in React?", answer: "State is managed within a component and mutable, while props are passed from parent to child and immutable." },
+        { category: 'react', question: "What is the purpose of keys in React lists?", answer: "Keys uniquely identify elements in a list, helping React optimize rendering." },
+        { category: 'react', question: "What is the significance of setState() method in React?", answer: "setState() updates the component's state and triggers a re-render." },
+        { category: 'react', question: "What are controlled components in React?", answer: "Controlled components have form elements controlled by React state." },
+        { category: 'react', question: "How does React Router work?", answer: "React Router enables navigation in single-page applications by mapping URLs to components." },
+        { category: 'react', question: "What are React hooks? How do they differ from class components?", answer: "React hooks allow functional components to use state and lifecycle features without a class." },
+        { category: 'react', question: "Explain the useEffect hook and its equivalents in class components.", answer: "useEffect performs side effects and combines lifecycle methods in functional components." },
+        { category: 'react', question: "What is Redux? How does it work with React?", answer: "Redux is a predictable state container for managing application state in a unidirectional flow." },
+        { category: 'react', question: "Explain the use of render method in React.", answer: "The render() method outputs the HTML for a React component." },
+        { category: 'react', question: "Explain props in React.", answer: "Props are objects used to pass information to a component." },
+        { category: 'react', question: "Explain the difference between functional and class component in React.", answer: "Functional components are plain functions, while class components require extending React.Component and have lifecycle methods." },
+        { category: 'react', question: "Explain one way data binding in React.", answer: "Data flows in one direction, from parent to child, making it easier to debug." },
+        { category: 'react', question: "What is the difference between useRef and createRef in React?", answer: "useRef persists a ref across renders, while createRef creates a new ref each time." },
+        { category: 'react', question: "What is react-redux?", answer: "React-redux simplifies state management across components." },
+        { category: 'react', question: "What is the difference between Virtual DOM and Real DOM?", answer: "Virtual DOM updates are faster and less memory-intensive than Real DOM updates." },
+        { category: 'react', question: "What are some important features of React?", answer: "Key features include JSX, components, one-way data binding, and the Virtual DOM." },
+        { category: 'react', question: "What is the difference between .js and .jsx files in React.js?", answer: ".jsx files are intended for React components using JSX syntax." },
+        { category: 'react', question: "What is the purpose of the setState() method?", answer: "setState() updates the component's state." },
+        { category: 'react', question: "What are the features of React?", answer: "Features include JSX, components, one-way data binding, and Virtual DOM." },
+        { category: 'react', question: "List some of the major advantages of React.", answer: "Advantages include Virtual DOM, component-based architecture, JSX, unidirectional data flow, and reusable components." },
+        { category: 'react', question: "What are the limitations of React?", answer: "Limitations include being just a library and having a steep learning curve." },
+        { category: 'react', question: "What are Higher Order Components (HOC)?", answer: "HOCs are functions that take a component and return a new component, enabling reuse of logic." },
+        { category: 'react', question: "What is the difference between a stateless component and a stateful component in React?", answer: "Stateless components do not have their own memory, while stateful components do." },
+        { category: 'react', question: "Explain React.js lifecycle methods.", answer: "Lifecycle methods include mounting, updating, and unmounting phases, allowing manipulation of components during their lifecycle." },
+
+        // WordPress Questions
+        { category: 'wordpress', question: "What is WordPress?", answer: "WordPress is an open-source content management system (CMS) that allows users to easily create, manage, and publish content on the web. It is based on PHP and uses a MySQL database." },
+        { category: 'wordpress', question: "Explain the difference between WordPress.com and WordPress.org.", answer: "WordPress.com is a hosted platform where users can create a website for free or purchase premium plans for additional features. It handles hosting, security, and maintenance. WordPress.org is the official website for the WordPress software, allowing users to download and install it on their own servers." },
+        { category: 'wordpress', question: "Explain the difference between posts and pages in WordPress.", answer: "Posts are dynamic entries listed in reverse chronological order, used for time-sensitive content. Pages are static and used for permanent content like About Us or Contact." },
+        { category: 'wordpress', question: "What are taxonomies in WordPress?", answer: "Taxonomies are a way to organize content. The main types are categories (hierarchical) and tags (non-hierarchical)." },
+        { category: 'wordpress', question: "How do you optimize the performance of a WordPress website?", answer: "Optimization techniques include using caching plugins, optimizing images, minifying CSS and JavaScript, enabling server-side caching, and using a CDN." },
+        { category: 'wordpress', question: "How do you create a custom post type in WordPress?", answer: "Use the register_post_type() function in your theme's functions.php file or a custom plugin." },
+        { category: 'wordpress', question: "By default, how many tables are there in WordPress?", answer: "By default, WordPress creates 12 tables in the database during installation." },
+        { category: 'wordpress', question: "Explain the difference between WordPress Categories and Tags.", answer: "Categories are broad and required for posts; tags are more specific and optional." },
+        { category: 'wordpress', question: "Explain the purpose of a child theme.", answer: "A child theme allows customization of a parent theme without altering its files, preserving changes during updates." },
+        { category: 'wordpress', question: "What is the purpose of the functions.php file in a WordPress theme?", answer: "It allows you to add custom PHP code, functions, and hooks to modify theme functionality." },
+        { category: 'wordpress', question: "What is the purpose of the wp-config.php file?", answer: "The wp-config.php file holds crucial configuration settings for your site, including database connection details and security keys." },
+        { category: 'wordpress', question: "What is a child theme in WordPress?", answer: "A child theme inherits functionality and styling from a parent theme, allowing modifications without altering original files." },
+        { category: 'wordpress', question: "Explain the WordPress loop.", answer: "The WordPress loop retrieves content from the database and displays it based on the current context." },
+        { category: 'wordpress', question: "What are WordPress themes and plugins?", answer: "Themes control design and layout, while plugins add functionalities to enhance features." },
+        { category: 'wordpress', question: "Which is considered more secure, WordPress.com or WordPress.org?", answer: "WordPress.com is generally more secure as it manages hosting and limits plugins." },
+        { category: 'wordpress', question: "Tell me some builder names in WordPress you have used.", answer: "(1) Elementor (2) Beaver Builder (3) Divi Builder (4) Visual Composer (5) WPBakery Page Builder." },
+
+        // Shopify Questions
+        { category: 'shopify', question: "How many blocks can we create in Shopify?", answer: "We can add up to 50 blocks per section." },
+        { category: 'shopify', question: "How many sections can we create in Shopify?", answer: "You can create up to 20 sections per theme in Shopify." },
+        { category: 'shopify', question: "Can you explain the differences between Shopify themes and templates?", answer: "Shopify themes are complete packages that define the overall design and functionality, while templates control the layout of specific pages." },
+        { category: 'shopify', question: "How do you optimize the performance of a Shopify store?", answer: "Performance optimization involves image optimization, using a CDN, minimizing app usage, and reducing external requests." },
+        { category: 'shopify', question: "How do you add custom functionality to a Shopify store?", answer: "Custom functionality can be added using apps, custom code, or Shopify's API." },
+        { category: 'shopify', question: "What is the Shopify API, and how is it used?", answer: "The Shopify API allows developers to interact with Shopify stores programmatically for creating apps and integrating systems." },
+        { category: 'shopify', question: "Can you explain the concept of 'metafields' in Shopify?", answer: "Metafields are used to add custom data to Shopify objects, allowing storage of additional information." },
+        { category: 'shopify', question: "What is the difference between Shopify themes and apps?", answer: "Themes control the store's presentation, while apps add functionality." },
+        { category: 'shopify', question: "What is 'liquid' as it pertains to Shopify development?", answer: "Liquid is a templating language used by Shopify for rendering dynamic content." },
+        { category: 'shopify', question: "How can you create a custom payment gateway for Shopify?", answer: "Creating a custom payment gateway requires developing an app that integrates with Shopify's Payment SDK." },
+        { category: 'shopify', question: "Can you explain the concept of 'multi-currency' in Shopify, and how can it be implemented?", answer: "Multi-currency allows a store to display prices in various currencies, implemented through the store's currency settings." },
+        { category: 'shopify', question: "Tell me some Shopify paid and free theme names.", answer: "Free Themes: (1) Debut (2) Dawn (3) Studio (4) Brooklyn (5) Sense. Paid Themes: (1) Ella (2) Shella (3) Prestige (4) Vision (5) Local." }
+
+    ];
+
+    let currentPage = 0;
+    const itemsPerPage = 5;
+    let currentCategory = 'html';
+
+    function displayQuestions() {
+        const faqList = document.querySelector('.faq-list');
+        faqList.innerHTML = '';
+
+        const filteredQuestions = currentCategory === 'all' ? questions : questions.filter(q => q.category === currentCategory);
+        const start = currentPage * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedQuestions = filteredQuestions.slice(start, end);
+
+        paginatedQuestions.forEach(q => {
+            const faqItem = document.createElement('div');
+            faqItem.classList.add('faq-item');
+
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('faq-question');
+            questionDiv.onclick = () => toggleAnswer(questionDiv);
+            questionDiv.innerHTML = `<h3>${q.question}</h3><span class="arrow">▼</span>`;
+            faqItem.appendChild(questionDiv);
+
+            const answerDiv = document.createElement('div');
+            answerDiv.classList.add('faq-answer');
+            answerDiv.innerHTML = `<p>${q.answer}</p>`;
+            faqItem.appendChild(answerDiv);
+
+            faqList.appendChild(faqItem);
+        });
+
+        // Update button state
+        document.getElementById('prevButton').disabled = currentPage === 0;
+        document.getElementById('nextButton').disabled = end >= filteredQuestions.length;
+    }
+
+    function toggleAnswer(element) {
+        const answer = element.nextElementSibling;
+        const arrow = element.querySelector('.arrow');
+        const isActive = element.classList.toggle('active');
+
+        if (isActive) {
+            answer.classList.add('active');
+        } else {
+            answer.classList.remove('active');
+        }
+    }
+
+    function changePage(direction) {
+        currentPage += direction;
+        displayQuestions();
+    }
+
+    function filterQuestions(category) {
+        currentCategory = category;
+        currentPage = 0;
+        displayQuestions();
+    }
+
+    // Initial display
+    displayQuestions();
+</script>
+
+</body>
+</html>
