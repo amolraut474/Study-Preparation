@@ -136,16 +136,25 @@
     const questions = [
         // HTML Questions
         { category: 'html', question: "What is HTML?", answer: "HTML stands for Hypertext Markup Language. It's the standard markup language used to create and design web pages." },
-        { category: 'html', question: "Can you explain the purpose of the doctype declaration in HTML?", answer: "The doctype declaration, usually seen at the beginning of an HTML document (<!DOCTYPE html>), informs the browser about the version of HTML being used and helps it render the document correctly." },
-        { category: 'html', question: "What are the key differences between inline and block-level elements in HTML?", answer: "Inline elements are elements that do not start on a new line and only take up as much width as necessary. Block-level elements start on a new line and occupy the full width available." },
+        { category: 'html', question: "Can you explain the purpose of the doctype declaration in HTML?", answer: "The doctype declaration, usually seen at the beginning of an HTML document ( DOCTYPE html), informs the browser about the version of HTML being used and helps it render the document correctly. It ensures that the browser interprets the HTML markup according to the appropriate specifications, minimizing rendering errors and ensuring consistency across different browsers." },
+        { category: 'html', question: "What are the key differences between inline and block-level elements in HTML?", answer: "Inline elements are elements that do not start on a new line and only take up as much width as necessary. Examples include span, a, and img. Block-level elements, on the other hand, start on a new line and occupy the full width available. Examples include div, p, and h1 tags." },
+
         { category: 'html', question: "What are the new features introduced in HTML5?", answer: "HTML5 introduced several new features including semantic elements (like header, footer, nav, etc.), audio and video support without plugins, canvas for drawing graphics, local storage, geolocation, and more." },
+
         { category: 'html', question: "Explain the purpose of the meta tag in HTML.", answer: "The meta tag is used to provide metadata about an HTML document, such as character encoding, author, description, keywords, and viewport settings for responsive web design." },
+
         { category: 'html', question: "What are the different types of lists in HTML?", answer: "HTML supports three types of lists: ordered lists (ol), unordered lists (ul), and definition lists (dl)." },
-        { category: 'html', question: "What is the difference between div and span in HTML?", answer: "'div' is a block-level element used to group larger sections of content, while 'span' is an inline element used to apply styles or group smaller sections of text." },
+
+        { category: 'html', question: "What is the difference between div and span in HTML?", answer: "'div' is a block-level element used to group larger sections of content, while 'span' is an inline element used to apply styles or group smaller sections of text within a line." },
+
         { category: 'html', question: "What are semantic elements in HTML? Give some examples.", answer: "Semantic elements provide meaning to the content they enclose, making it more understandable for both developers and browsers. Examples include header, footer, nav, article, section, aside, and main." },
-        { category: 'html', question: "What are HTML tags?", answer: "HTML tags are elements used to mark up the content of a web page, defining its structure and formatting." },
-        { category: 'html', question: "What is a marquee in HTML?", answer: "Marquee is used for scrolling text on a web page. It scrolls the image or text up, down, left, or right automatically." },
+
+        { category: 'html', question: "What are HTML tags?", answer: "HTML tags are elements used to mark up the content of a web page, defining its structure and formatting. They consist of angle brackets surrounding a keyword, which represents the function or purpose of the tag. HTML tags are paired, with an opening tag and a closing tag, and they enclose content to which they apply. Some tags may be self-closing if they don't contain any content." },
+
+        { category: 'html', question: "What is a marquee in HTML?", answer: "Marquee is used for scrolling text on a web page. It scrolls the image or text up, down, left, or right automatically. To apply for a marquee, you have to use marquee tags." },
+
         { category: 'html', question: "Are the HTML tags and elements the same thing?", answer: "No, HTML tags are used to define the structure of a web page, while HTML elements are made up of a set of tags that define a specific part of a web page." },
+
         { category: 'html', question: "What are the various heading tags and their importance?", answer: "There are 6 levels of headings defined by HTML. These six heading elements are H1, H2, H3, H4, H5, and H6; with H1 being at the highest level and H6 at the least." },
         { category: 'html', question: "Difference between id and class attribute?", answer: "The only difference between them is that 'id' is unique on a page and can only apply to at most one element, while the 'class' selector can apply to multiple elements." },
         { category: 'html', question: "What is the <meta> tag used for?", answer: "The <meta> tag is used to provide meta-information about the HTML document, such as character set, author, description, keywords, and viewport settings for responsive design." },
