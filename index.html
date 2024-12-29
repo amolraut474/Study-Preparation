@@ -421,6 +421,92 @@
             { category: 'wordpress', question: "Tell me some builder names in WordPress you have used.", answer: "(1) Elementor (2) Beaver Builder (3) Divi Builder (4) Visual Composer (5) WPBakery Page Builder." },
 
             { category: 'wordpress', question: " WordPress: free and paid themes?.", answer: "free:- (1)Twenty Twenty-One (2)Twenty Twenty-Two (3)Twenty Twenty-Four (4)Twenty Twenty-Three (5)Astra paid:- (1)Divi (2)Avada (3)Enfold" },
+
+            {
+                category: 'wordpress',
+                question: "How to increase WordPress website security?",
+                answer: "Despite being a safe CMS, WordPress is susceptible to attacks. Security can be enhanced in many ways: (1) Secure login procedures (2) Use a secure WordPress hosting provider (3) Update the WordPress version (4) Upgrade the PHP version (5) Install security plugins (6) Select a secure theme (7) Enable SSL or HTTPS (8) Set up a firewall (9) Backup your site regularly (10) Manage user permissions (11) Change the default login URL (12) Disable xmlrpc.php file (13) Disable editing files in the dashboard (14) Modify the database file prefix (15) Delete the default admin account (16) Hide the WordPress version."
+            },
+            {
+                category: 'wordpress',
+                question: "List some of the plugins that come with WordPress.",
+                answer: "The following are the top ten most popular WordPress plugins based on actual downloads from WordPress.org: (1) Yoast SEO (2) Wordfence Security (3) Akismet (4) Contact Form 7 (5) Google Analytics for WordPress (6) Jetpack (7) Elementor (8) WPForms (9) WooCommerce (10) All in One SEO Pack."
+            },
+            {
+                category: 'wordpress',
+                question: "How to create a plugin in WordPress?",
+                answer: "To create a plugin in WordPress: (1) Navigate to the wp-content/plugins directory. (2) Create a new folder, e.g., 'my-custom-plugin'. (3) Inside the folder, create a PHP file, e.g., 'my-custom-plugin.php'. (4) Add the plugin header: '/* Plugin Name: My Custom Plugin Plugin URI: https://example.com Description: A brief description Version: 1.0 Author: Your Name Author URI: https://example.com */'. (5) Write your plugin code using hooks and filters. (6) Save changes and activate the plugin in the dashboard under Plugins > Installed Plugins. (7) Test to ensure functionality works as expected."
+            },
+            {
+                category: 'wordpress',
+                question: "What do you mean by posts and pages in WordPress?",
+                answer: "The difference between posts and pages is that posts are timely and regularly updated, while pages are static. Both can be used in unlimited numbers on a website. WordPress Posts: Posts represent the blog aspect of a website. They are informational updates or news about a specific topic. Posts can be tagged, categorized, and archived. Their content is dynamic and frequently changing. WordPress Pages: Pages are a prebuilt post type in WordPress that typically contain static content. Pages are not updated as frequently as posts. Examples include the 'About Us' page, 'Contact Us' page, 'TOCs', and 'Write for Us' page."
+            },
+            {
+                category: 'wordpress',
+                question: "Can you create custom post types in WordPress?",
+                answer: "Yes, WordPress developers can create custom post types. The register_post_type() function can be used to add a custom post type. Additionally, plugins like 'Custom Post Type UI' and 'Advanced Custom Fields' make it easier to create and manage custom post types."
+            },
+            {
+                category: 'wordpress',
+                question: "How can comments be disabled in WordPress?",
+                answer: "Disabling comments in WordPress can be done in several ways. To disable comments on future posts: (1) Navigate to the admin panel -> Settings -> Discussion tab. (2) Uncheck the 'Allow people to post comments on new articles' option. (3) Click 'Save Changes'. This will disable comments on all future posts."
+            },
+            {
+                category: 'wordpress',
+                question: "What are config files in WordPress?",
+                answer: "Wp-config.php is a core WordPress file that contains important information about the database, such as its name, username, password, and host (usually localhost). WordPress uses this information to store and retrieve data, including users, posts, and settings, from the database. By default, WordPress does not include the wp-config.php file in its download package. Instead, it provides a file named wp-config-sample.php, which can be renamed to wp-config.php."
+            },
+
+            {
+                category: 'wordpress',
+                question: "How to create a page template in WordPress?",
+                answer: "To create a custom page template in WordPress: (1) Add a new PHP file to the theme folder, e.g., 'news.php'. (2) At the top of the new file, add the get_header() and get_footer() functions. (3) Include a comment at the top to define the template name, e.g., '/* Template Name: News Template */'. (4) Save the file. The template can now be selected in the WordPress dashboard when creating or editing a page."
+            },
+            {
+                category: 'wordpress',
+                question: "List a few template tags that can be used in WordPress.",
+                answer: "Here are some commonly used template tags in WordPress: (1) get_header() (2) get_footer() (3) get_sidebar() (4) wp_login_url() (5) get_calendar() (6) allowed_tags() (7) the_author() (8) get_the_author() (9) wp_list_bookmarks() (10) get_bookmark() (11) the_category() (12) the_category_rss() (13) comment_author() (14) comment_author_email() (15) the_permalink() (16) user_trailingslashit() (17) permalink_anchor() (18) post_class() (19) post_password_required() (20) get_post_thumbnail_id() (21) the_post_thumbnail() (22) wp_nav_menu() (23) walk_nav_menu_tree()"
+            },
+            {
+                category: 'wordpress',
+                question: "What do you mean by WordPress Hooks?",
+                answer: "WordPress Hooks allow you to alter or customize functionality without modifying core files. They enable you to manipulate or add new features to WordPress at predefined points during its execution, making it easier to modify behavior while keeping the core code intact."
+            },
+
+            {
+                category: 'wordpress',
+                question: "What is Action and Filter Hooks?",
+                answer: "Action and Filter are types of WordPress Hooks. Action Hooks: These allow you to perform tasks at specific points during WordPress runtime. They are defined as: do_action( 'action_name', [optional_arguments] ). Filter Hooks: These allow you to modify and return any data processed by WordPress. They are defined as: apply_filters( 'filter_name', 'value_to_be_filtered', [optional_arguments] )."
+            },
+            {
+                category: 'wordpress',
+                question: "Explain WordPress Taxonomies.",
+                answer: "WordPress Taxonomies group content or data together, helping to organize and classify your posts based on shared characteristics. By using taxonomies, you can categorize or tag content. WordPress includes two default taxonomies: Categories and Tags. You can also create custom taxonomies to better fit your website's structure and organization needs."
+            },
+
+            {
+                category: 'wordpress',
+                question: "Explain Category and Tags in WordPress. How to convert a category into a tag?",
+                answer: "Categories and Tags play an important role in content organization and SEO. Categories: Categories are used to group content on a WordPress website into general topics. A category typically represents a broad subject or group of related topics. A post can belong to multiple categories, but it's best to assign only two or three categories per post for clarity. Tags: Tags are used to identify content with specific keywords or phrases. They help describe the post by pinpointing key topics in more detail. Tags are usually more specific than categories. To convert a category into a tag, you can go to the WordPress dashboard -> Posts -> Categories, and create a new tag by navigating to Posts -> Tags. You can then manually assign the tag to posts previously categorized under the category you want to convert."
+            },
+            {
+                category: 'wordpress',
+                question: "What do you think are the hooks? Can you define different types of hooks in WordPress?",
+                answer: "Hooks in WordPress allow users to add custom code to themes or plugins without modifying the core WordPress files. There are two main types of hooks: Action Hooks: Action hooks allow you to insert additional code or functionality at specific points during the WordPress runtime. They are used to execute custom actions at predefined places in the WordPress lifecycle. Filter Hooks: Filter hooks allow you to modify content or data before it is displayed. They are commonly used to modify text, content, or other elements, such as adding custom content at the end of a post."
+            },
+            {
+                category: 'wordpress',
+                question: "What is the purpose of the functions.php file in a WordPress theme?",
+                answer: "The functions.php file is critical in a WordPress theme's directory. It allows you to add custom code, functions, and hooks to modify or extend the theme's functionality. It's often used to enqueue stylesheets, register custom post types, and add theme-specific features."
+            },
+            {
+                category: 'wordpress',
+                question: "How to create a custom shortcode in WordPress?",
+                answer: "To create a custom shortcode in WordPress, you need to define it in the `functions.php` file of your theme or within a custom plugin using the `add_shortcode()` function. A shortcode allows you to insert custom functionality into posts and pages without modifying the HTML. For example, you can create a simple shortcode that displays a custom message with a customizable color like this: \n\n```php\nfunction custom_message_shortcode($atts, $content = null) {\n    $atts = shortcode_atts(\n        array(\n            'color' => 'blue',\n        ),\n        $atts,\n        'custom_message'\n    );\n    return '<span style=\"color:' . esc_attr($atts['color']) . ';\">' . $content . '</span>';\n}\nadd_shortcode('custom_message', 'custom_message_shortcode');\n``` \n\nThis allows you to use `[custom_message color=\"red\"]This is a custom message[/custom_message]` to display the message in red text. Shortcodes help extend functionality easily and can be used to display dynamic content with minimal effort."
+            },
+
+
             // Shopify Questions
 
             { category: 'shopify', question: "How many blocks can we create in Shopify?", answer: "We can add up to 50 blocks per section." },
